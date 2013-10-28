@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Snake</title>
+
+    <style>
+    p {
+      padding: 0;
+      margin: 0;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Snake</h1>
+
+    <div id="board">
+    </div>
+
+    <script type="text/javascript" src="underscore-min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="snake.js"></script>
+    <script type="text/javascript" src="snake_ui.js"></script>
+    <script>
+    $(document).ready(function(){
+      var board = new SnakeGame.Board();
+      console.log(board.render(30, 30));
+      // console.log(board.stringify(board.render(30, 30)));
+      $('#board').html(board.stringify(board.render(30, 30)))
+      var cookie = new SnakeGame.View("food");
+      cookie.start();
+    });
+
+
+    </script>
+
+  </body>
+
+</html>
