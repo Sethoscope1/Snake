@@ -59,8 +59,4 @@
   //    this.bindKeyHandlers();
   //  };
 
-
-
-
-
 })(this);
