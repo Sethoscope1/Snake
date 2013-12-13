@@ -21,7 +21,7 @@
     var that = this;
     $(document).on('keydown', function(event){
       if(event.keyCode === 13){
-        window.setInterval(function(){
+        that.interval = window.setInterval(function(){
           that.step(board)
         }, 100 );
       } else {
@@ -29,13 +29,21 @@
       }
       console.log(event.keyCode);
     });
-
-
   };
+	
+	View.prototype.stop = function() {
+		window.clearInterval();
+	}
 
   View.prototype.step = function(board) {
-    board.snake.move();
-    $('#board').html(board.stringify(board.render(30, 30)));
+		var that = this;
+    var turn = board.snake.move();
+		if(turn==false){
+			clearInterval(that.interval);
+		} else {
+    	$('#board').html(board.stringify(board.render(20, 20)));
+		}
+
   }
 
   View.prototype.keyHandler = function(code, board){

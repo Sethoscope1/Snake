@@ -4,7 +4,7 @@
 
   <head>
     <title>Snake</title>
-
+		<link rel="stylesheet" type="text/css" href="style.css">
     <style>
     p {
       padding: 0;
@@ -15,10 +15,14 @@
   </head>
 
   <body>
-    <h1>Snake</h1>
-
-    <div id="board">
-    </div>
+		
+		<div id="lesnake-wrapper">
+			<div id="lesnake"><img src="images/lesnake.png"></div>
+		</div>
+		
+    <div id="board-wrapper">
+			<div id="board"></div>
+		</div>
 
     <script type="text/javascript" src="underscore-min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -27,11 +31,10 @@
     <script>
     $(document).ready(function(){
       var board = new SnakeGame.Board();
-      console.log(board.render(30, 30));
-      // console.log(board.stringify(board.render(30, 30)));
-      $('#board').html(board.stringify(board.render(30, 30)))
-      var cookie = new SnakeGame.View("food");
-      cookie.start();
+      console.log(board.render(20, 20));
+      $('#board').html(board.stringify(board.render(20, 20)))
+      var game = new SnakeGame.View("food");
+      game.start();
     });
 
 

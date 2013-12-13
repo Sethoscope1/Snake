@@ -1,0 +1,53 @@
+body, p, div, h1, h2, h3, h4, h5, h6, span, section, img {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	text-align: baseline;
+}
+
+body {
+	font-family: sans-serif;	
+	background-image: url("images/bottlesbackground.jpg");
+	background-size: 100%;
+}
+
+.square {
+	width: 20px;
+	height: 20px;
+	display: inline-block;	
+}
+
+div.space {
+	background-color: white;
+
+	opacity: 0.3;
+}
+
+div.segment {
+	background-image: url("images/goldsquare.jpg");
+	background-size: 100%;
+}
+
+#lesnake {
+
+}
+
+#lesnake img {
+	width: 100%;
+	max-width: 600px;
+	padding: 40px 0 30px 0;
+}
+
+#lesnake-wrapper, #board-wrapper {
+	width: 100%;
+}
+
+#board {
+	width: 485px;
+	margin: auto;
+}
+
+#lesnake {
+	width: 600px;
+	margin: auto;
+}

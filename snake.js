@@ -5,6 +5,14 @@
     this.x = x;
     this.y = y;
   }
+	
+	Coord.onBoard = function(x, y) {
+		return ((x >= 0 && x <= 19) && (y >= 0 && y <= 19))
+	}
+	
+	Coord.offSnake = function(x, y) {
+		return 
+	}
 
   Coord.plus = function(coord1, coord2) {
     return new Coord((coord1.x + coord2.x), (coord1.y + coord2.y));
@@ -25,7 +33,7 @@
 
     this.direction = "N";
     // Array of coordinate objects
-    this.segments = this.snakerator([[15, 15], [15, 14], [15, 13], [15, 12], [15, 11]]);
+    this.segments = this.snakerator([[10, 10], [10, 9], [10, 8], [10, 7], [10, 6]]);
   }
 
 
@@ -42,7 +50,11 @@
     this.segments.shift();
     var head = _.last(this.segments);
     var newHead = Coord.plus(head, this.DIRECTIONS[this.direction]);
-    this.segments.push(newHead);
+		if(Coord.onBoard(newHead.x, newHead.y)){
+    	this.segments.push(newHead);
+		} else {
+			return false;
+		}
   }
 
   Snake.prototype.turn = function(direction){
@@ -59,13 +71,13 @@
     for(var i=0; i < height; i++) {
       var row = [];
       for(var j=0; j < width; j++) {
-        row.push(" __ ");
+        row.push("<div class=\"square space\"></div>");
       }
       board.push(row);
     }
 
     this.snake.segments.forEach(function(segment) {
-      board[segment.y][segment.x] = ".^.";
+      board[segment.y][segment.x] = "<div class=\"square segment\"></div>";
     });
 
     return board;
@@ -74,7 +86,7 @@
   Board.prototype.stringify = function(array) {
     var board = []
     for(i = 0; i < array.length; i++) {
-      var row = "<p>" + array[i].join(" ") + "</p>";
+      var row = array[i].join(" ") + "<br>";
       board.push(row);
     }
     return board.join("\n");
