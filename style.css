@@ -9,11 +9,12 @@ body {
 	font-family: sans-serif;	
 	background-image: url("images/bottlesbackground.jpg");
 	background-size: 100%;
+	background-height: 100%;
 }
 
 .square {
-	width: 20px;
-	height: 20px;
+	width: 18px;
+	height: 18px;
 	display: inline-block;	
 }
 
@@ -24,12 +25,15 @@ div.space {
 }
 
 div.segment {
-	background-image: url("images/goldsquare.jpg");
-	background-size: 100%;
+		background-image: url("images/goldsquare.jpg");
+}
+
+div.apple {
+		background-color: #2EFFE1;
 }
 
 #lesnake {
-
+	padding-right: 20px;
 }
 
 #lesnake img {
@@ -43,7 +47,7 @@ div.segment {
 }
 
 #board {
-	width: 485px;
+	width: 450px;
 	margin: auto;
 }
 

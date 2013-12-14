@@ -10,15 +10,23 @@
 		return ((x >= 0 && x <= 19) && (y >= 0 && y <= 19))
 	}
 	
-	Coord.offSnake = function(x, y) {
-		return 
+	Coord.offSnake = function(snake, coord) {
+		var segments = snake.segments;
+		for (var i = 0; i < segments.length; i++) {
+			if (segments[i].x == coord.x && segments[i].y == coord.y) {
+				return false;
+			}
+		}
+		return true;
 	}
 
   Coord.plus = function(coord1, coord2) {
     return new Coord((coord1.x + coord2.x), (coord1.y + coord2.y));
   }
 
-  var Snake = SnakeGame.Snake = function() {
+  var Snake = SnakeGame.Snake = function(board) {
+		this.board = board;
+		
     var N = new Coord(0, -1);
     var S = new Coord(0, 1);
     var W = new Coord(-1, 0);
@@ -35,8 +43,16 @@
     // Array of coordinate objects
     this.segments = this.snakerator([[10, 10], [10, 9], [10, 8], [10, 7], [10, 6]]);
   }
-
-
+	
+	var Apple = SnakeGame.Apple = function() {
+	}
+	
+	Apple.prototype.generate = function() {
+		var x = Math.floor(Math.random() * 20);
+		var y = Math.floor(Math.random() * 20);
+		
+		this.coord = new Coord(x, y);
+	}
 
   Snake.prototype.snakerator = function(segArray) {
     array = [];
@@ -47,10 +63,23 @@
   }
 
   Snake.prototype.move = function(){
-    this.segments.shift();
     var head = _.last(this.segments);
     var newHead = Coord.plus(head, this.DIRECTIONS[this.direction]);
-		if(Coord.onBoard(newHead.x, newHead.y)){
+		
+		var appX = this.board.apple.coord.x;
+		var appY = this.board.apple.coord.y;
+		
+		if(newHead.x == appX && newHead.y == appY) {
+			this.board.apple.generate();
+		} else {
+			this.segments.shift();
+		}
+
+		console.log(newHead.x);
+		console.log(newHead);
+
+
+		if(Coord.onBoard(newHead.x, newHead.y) && Coord.offSnake(this, newHead)){
     	this.segments.push(newHead);
 		} else {
 			return false;
@@ -62,8 +91,9 @@
   }
 
   var Board = SnakeGame.Board = function() {
-    this.snake = new Snake();
-    this.apples = [];
+    this.snake = new Snake(this);
+		this.apple = new Apple();
+		this.apple.generate();
   }
 
   Board.prototype.render = function(width, height) {
@@ -76,9 +106,21 @@
       board.push(row);
     }
 
+		var appX = this.apple.coord.x;
+		var appY = this.apple.coord.y;
+		
+		// console.log(this.snake);
+	// 	console.log(this.apple.coord);
+		
+		board[appY][appX] = "<div class=\"square apple\"></div>";
+
     this.snake.segments.forEach(function(segment) {
       board[segment.y][segment.x] = "<div class=\"square segment\"></div>";
-    });
+    }
+	
+	
+		// board[board.apple.y][board.apple.x] = "<div class=\"square apple\"></div>";
+	);
 
     return board;
   };
