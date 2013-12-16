@@ -16,7 +16,7 @@ IN PROGRESS - Snake game built in Javascript and HTML
 ### Controls
 
 *  Press Enter to get your snake rolling. User the arrow keys to move him around.
-*  *Snake* should be frought with peril; each step towards that golden apple is another step towards your destiny. This is a more casual take on the game. You wander aimlessly, and don't grow too big for your britches - or at all! And no apples!
+*  *Snake* is frought with peril; each step towards that green apple is another step towards your destiny. The more you eat, the bigger you get.
 
 ### Goals
 
